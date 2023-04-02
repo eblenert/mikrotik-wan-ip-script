@@ -1,13 +1,9 @@
 :global currentIP;
 :global url;
-:local newIPString;
-:local ipAddressParts;
 :local newIP;
 :local result;
 
-:set newIPString [/ip address get [find interface="rds"] address];
-
-:set newIP [:pick $newIPString 0 [:find $newIPString "/"]];
+:set newIP [/ip address get [find interface="rds"] address];
 
 :if ($newIP != currentIP) do={
   :log info "IP address $currentIP changed to $newIP";
