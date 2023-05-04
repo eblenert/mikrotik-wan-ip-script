@@ -1,12 +1,12 @@
-:global currentIP;
-:global url;
-:local newIP;
-:local result;
+:local url ""
 
-:set newIP [/ip address get [find interface="rds"] address];
+:local newIP [/ip address get [find interface="isp"] address];
+:local currentIP [/interface ethernet get ether1 comment];
+#:log info "newip $newIP";
+#:log info "current ip $currentIP";
 
-:if ($newIP != currentIP) do={
+:if ($newIP != $currentIP) do={
   :log info "IP address $currentIP changed to $newIP";
-  :set currentIP $newIP;
-  :set result [/tool fetch url="$url"];
+  /interface ethernet set ether1 comment=$newIP;
+  /tool fetch url="$url";
 }
